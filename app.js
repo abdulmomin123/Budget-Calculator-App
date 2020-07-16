@@ -5,7 +5,15 @@ var budgetController = (function () {
 
 // UI Controller Module
 var UIController = (function () {
-  // Code goes here
+  return {
+    getInput: function () {
+      return {
+        type: document.querySelector(".add__type").value, // inc or exp
+        description: document.querySelector(".add__description").value,
+        value: document.querySelector(".add__value").value,
+      };
+    },
+  };
 })();
 
 // General App Controller Module
@@ -14,9 +22,14 @@ var controller = (function (budgetCTRL, UICTRL) {
 
   var ctrlAddItem = function () {
     // Get data from input fields
+    var input = UICTRL.getInput();
+
     // Add item to budget controller
+
     // Add item to UI
+
     // Calculate the budget
+
     // Display the budget
   };
   addBtn.addEventListener("click", ctrlAddItem);
