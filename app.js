@@ -5,20 +5,32 @@ var budgetController = (function () {
 
 // UI Controller Module
 var UIController = (function () {
+  var DOMStrings = {
+    inputType: ".add__type",
+    inputDescription: ".add__description",
+    inputValue: ".add__value",
+    inputBtn: ".add__btn",
+  };
+
   return {
     getInput: function () {
       return {
-        type: document.querySelector(".add__type").value, // inc or exp
-        description: document.querySelector(".add__description").value,
-        value: document.querySelector(".add__value").value,
+        type: document.querySelector(DOMStrings.inputType).value, // inc or exp
+        description: document.querySelector(DOMStrings.inputDescription).value,
+        value: document.querySelector(DOMStrings.inputValue).value,
       };
+    },
+
+    getDOMStrings: function () {
+      return DOMStrings;
     },
   };
 })();
 
 // General App Controller Module
 var controller = (function (budgetCTRL, UICTRL) {
-  var addBtn = document.querySelector(".add__btn");
+  var DOM = UICTRL.getDOMStrings();
+  var addBtn = document.querySelector(DOM.inputBtn);
 
   var ctrlAddItem = function () {
     // Get data from input fields
