@@ -28,6 +28,23 @@ var budgetController = (function () {
       expenses: 0,
     },
   };
+
+  return {
+    addItem: function (type, des, val) {
+      var newItem, ID;
+      ID = 0;
+
+      if (type === "inc") {
+        newItem = new Income(ID, des, val);
+      } else if (type === "exp") {
+        newItem = new Expense(ID, des, val);
+      }
+
+      data.allItems[type].push(newItem);
+
+      return newItem;
+    },
+  };
 })();
 
 // UI Controller Module
@@ -75,7 +92,6 @@ var controller = (function (budgetCTRL, UICTRL) {
   var ctrlAddItem = function () {
     // Get data from input fields
     var input = UICTRL.getInput();
-    console.log(input);
 
     // Add item to budget controller
 
