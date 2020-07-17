@@ -103,7 +103,7 @@ var controller = (function (budgetCTRL, UICTRL) {
     // Get data from input fields
     input = UICTRL.getInput();
 
-    // Add item to budget controller
+    // Add item to budget controller data structure
     newItem = budgetCTRL.addItem(input.type, input.description, input.value);
 
     // Add item to UI
