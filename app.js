@@ -1,6 +1,33 @@
 // Budget Controller Module
 var budgetController = (function () {
-  // Code goes here
+  // Function Constructors
+  var Income, Expense;
+
+  Income = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  Expense = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  // Main Data Structure
+  var data;
+  data = {
+    allItems: {
+      incomes: [],
+      expenses: [],
+    },
+
+    totals: {
+      incomes: 0,
+      expenses: 0,
+    },
+  };
 })();
 
 // UI Controller Module
