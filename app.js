@@ -19,31 +19,40 @@ var budgetController = (function () {
   var data;
   data = {
     allItems: {
-      incomes: [],
-      expenses: [],
+      inc: [],
+      exp: [],
     },
 
     totals: {
-      incomes: 0,
-      expenses: 0,
+      inc: 0,
+      exp: 0,
     },
   };
 
   return {
     addItem: function (type, des, val) {
       var newItem, ID;
-      ID = 0;
 
+      // Create new ID
+      if (data.allItems[type].length > 0) {
+        ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+      } else {
+        ID = 0;
+      }
+
+      // Create new item
       if (type === "inc") {
         newItem = new Income(ID, des, val);
       } else if (type === "exp") {
         newItem = new Expense(ID, des, val);
       }
 
+      // Push item to Data structure
       data.allItems[type].push(newItem);
 
       return newItem;
     },
+    test: data,
   };
 })();
 
@@ -90,10 +99,13 @@ var controller = (function (budgetCTRL, UICTRL) {
 
   // Add Item
   var ctrlAddItem = function () {
+    var input, newItem;
+
     // Get data from input fields
-    var input = UICTRL.getInput();
+    input = UICTRL.getInput();
 
     // Add item to budget controller
+    newItem = budgetCTRL.addItem(input.type, input.description, input.value);
 
     // Add item to UI
 
