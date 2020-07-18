@@ -79,6 +79,7 @@ var UIController = (function () {
       };
     },
 
+    // Adds list to the UI
     addListItem: function (obj, type) {
       var html, newHtml, element;
 
