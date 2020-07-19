@@ -41,6 +41,7 @@ var budgetController = (function () {
     },
 
     budget: 0,
+    percentenge: -1,
   };
 
   return {
@@ -77,6 +78,22 @@ var budgetController = (function () {
       data.budget = data.totals.inc - data.totals.exp;
 
       // Calculate the percentenge
+      if (data.totals.inc > 0) {
+        data.percentenge = Math.round(
+          (data.totals.exp / data.totals.inc) * 100
+        );
+      } else {
+        data.percentenge = -1;
+      }
+    },
+
+    getBudget: function () {
+      return {
+        budget: data.budget,
+        totalInc: data.totals.inc,
+        totalExp: data.totals.exp,
+        percentenge: data.percentenge,
+      };
     },
 
     test: function () {
@@ -173,6 +190,8 @@ var controller = (function (budgetCTRL, UICTRL) {
     budgetCTRL.calculateBudget();
 
     // Return Budget
+    var budget = budgetCTRL.getBudget();
+
     // Display the budget
   };
 
