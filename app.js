@@ -52,6 +52,9 @@ var budgetController = (function () {
 
       return newItem;
     },
+    test: function () {
+      console.log(data);
+    },
   };
 })();
 
@@ -75,7 +78,7 @@ var UIController = (function () {
       return {
         type: document.querySelector(DOMStrings.inputType).value, // inc or exp
         description: document.querySelector(DOMStrings.inputDescription).value,
-        value: document.querySelector(DOMStrings.inputValue).value,
+        value: parseInt(document.querySelector(DOMStrings.inputValue).value),
       };
     },
 
@@ -143,6 +146,7 @@ var controller = (function (budgetCTRL, UICTRL) {
 
     // Get data from input fields
     input = UICTRL.getInput();
+    // input.value = parseInt(this.value);
 
     // Add item to budget controller data structure
     newItem = budgetCTRL.addItem(input.type, input.description, input.value);
