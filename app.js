@@ -15,6 +15,18 @@ var budgetController = (function () {
     this.value = value;
   };
 
+  calculateTotal = function (type) {
+    sum = 0;
+
+    // calculate
+    data.allItems[type].forEach(function (current) {
+      sum += current.value;
+    });
+
+    // store
+    data.totals[type] = sum;
+  };
+
   // Main Data Structure
   var data;
   data = {
@@ -27,6 +39,8 @@ var budgetController = (function () {
       inc: 0,
       exp: 0,
     },
+
+    budget: 0,
   };
 
   return {
@@ -51,6 +65,18 @@ var budgetController = (function () {
       data.allItems[type].push(newItem);
 
       return newItem;
+    },
+
+    // Calculates the budget
+    calculateBudget: function (type) {
+      // Calculate total income and expense
+      calculateTotal("inc");
+      calculateTotal("exp");
+
+      // Calculate the budget
+      data.budget = data.totals.inc - data.totals.exp;
+
+      // Calculate the percentenge
     },
 
     test: function () {
@@ -144,6 +170,8 @@ var controller = (function (budgetCTRL, UICTRL) {
   // Calcualte and display the budget
   var updateBudget = function () {
     // Calculate the budget
+    budgetCTRL.calculateBudget();
+
     // Return Budget
     // Display the budget
   };
@@ -166,6 +194,7 @@ var controller = (function (budgetCTRL, UICTRL) {
       UICTRL.clearFields();
 
       // Calculate and Update the budget
+      updateBudget();
     }
   };
 
