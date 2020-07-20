@@ -111,6 +111,10 @@ var UIController = (function () {
     inputBtn: ".add__btn",
     incomeList: ".income__list",
     expenseList: ".expenses__list",
+    budgetLabel: ".budget__value",
+    incomeLabel: ".budget__income--value",
+    expenseLabel: ".budget__expenses--value",
+    percentengeLabel: ".budget__expenses--percentage",
   };
 
   return {
@@ -164,6 +168,21 @@ var UIController = (function () {
       });
       fieldsArray[0].focus();
     },
+
+    // Prints the budget data to the dom
+    displayBudget: function (obj) {
+      document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
+      document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalInc;
+      document.querySelector(DOMStrings.expenseLabel).textContent =
+        obj.totalExp;
+
+      if (obj.percentenge > 0) {
+        document.querySelector(DOMStrings.percentengeLabel).textContent =
+          obj.percentenge + "%";
+      } else {
+        document.querySelector(DOMStrings.percentengeLabel).textContent = "...";
+      }
+    },
   };
 })();
 
@@ -193,6 +212,7 @@ var controller = (function (budgetCTRL, UICTRL) {
     var budget = budgetCTRL.getBudget();
 
     // Display the budget
+    UICTRL.displayBudget(budget);
   };
 
   // Add Item
