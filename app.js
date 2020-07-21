@@ -202,6 +202,13 @@ var UIController = (function () {
         document.querySelector(DOMStrings.percentengeLabel).textContent = "...";
       }
     },
+
+    deleteListItem: function (id) {
+      // Selecting the elemnt we want to delte
+      var elementId = document.getElementById(id);
+
+      elementId.parentNode.removeChild(elementId);
+    },
   };
 })();
 
@@ -276,8 +283,10 @@ var controller = (function (budgetCTRL, UICTRL) {
     budgetCTRL.deleteItem(type, ID);
 
     // Delete item from UI
+    UICTRL.deleteListItem(itemId);
 
     // Update the Budget
+    updateBudget();
 
     // Show updated Budget
   };
