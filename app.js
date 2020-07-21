@@ -87,6 +87,7 @@ var budgetController = (function () {
       }
     },
 
+    // Gets the Budget
     getBudget: function () {
       return {
         budget: data.budget,
@@ -94,6 +95,23 @@ var budgetController = (function () {
         totalExp: data.totals.exp,
         percentenge: data.percentenge,
       };
+    },
+
+    // Deletes item from data structure
+    deleteItem: function (type, id) {
+      var ids, index;
+
+      // Stores all the id's in a new Array
+      ids = data.allItems[type].map(function (current) {
+        return current.id;
+      });
+
+      // Gets the index
+      index = ids.indexOf(id);
+
+      if (index !== -1) {
+        data.allItems[type].splice(index, 1);
+      }
     },
 
     test: function () {
@@ -251,10 +269,11 @@ var controller = (function (budgetCTRL, UICTRL) {
       splitId = itemId.split("-");
 
       type = splitId[0];
-      ID = splitId[1];
+      ID = parseInt(splitId[1]);
     }
 
     // Delete item from data structure
+    budgetCTRL.deleteItem(type, ID);
 
     // Delete item from UI
 
