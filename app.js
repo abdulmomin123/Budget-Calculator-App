@@ -83,6 +83,7 @@ var budgetController = (function () {
     calculateBudget: function (type) {
       // Calculate total income and expense
       calculateTotal("inc");
+
       calculateTotal("exp");
 
       // Calculate the budget
@@ -126,11 +127,20 @@ var budgetController = (function () {
     },
 
     // Calculates percentenge
-    calculatePercentages: function () {
+    calculatePercentage: function () {
       // Calculates percentage for each item
       data.allItems.exp.forEach((element) => {
-        element.calcPercentage();
+        element.calcPercentage(data.totals.inc);
       });
+    },
+
+    // Gets all the percentages
+    getPercentages: function () {
+      var allPerc = data.allItems.exp.map((element) => {
+        return element.getPercentage();
+      });
+
+      return allPerc;
     },
 
     test: function () {
@@ -317,8 +327,13 @@ var controller = (function (budgetCTRL, UICTRL) {
 
   updatePercentages = function () {
     // Calculate the percentages
+    budgetCTRL.calculatePercentage();
+
     // Read the percentages from Budget controller
+    var percentages = budgetCTRL.getPercentages();
+
     // Display updated percentages
+    console.log(percentages);
   };
 
   return {
