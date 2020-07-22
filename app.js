@@ -245,7 +245,7 @@ var controller = (function (budgetCTRL, UICTRL) {
     UICTRL.displayBudget(budget);
   };
 
-  // Add Item
+  // Adds an Item
   ctrlAddItem = function () {
     var input, newItem;
 
@@ -264,9 +264,13 @@ var controller = (function (budgetCTRL, UICTRL) {
 
       // Calculate and Update the budget
       updateBudget();
+
+      // Calculate and display updated percentages
+      updatePercentages();
     }
   };
 
+  // Deletes an item
   ctrlDeleteItem = function (event) {
     var itemId, splitId, type, ID;
 
@@ -288,7 +292,14 @@ var controller = (function (budgetCTRL, UICTRL) {
     // Update the Budget
     updateBudget();
 
-    // Show updated Budget
+    // Calculate and display updated percentages
+    updatePercentages();
+  };
+
+  updatePercentages = function () {
+    // Calculate the percentages
+    // Read the percentages from Budget controller
+    // Display updated percentages
   };
 
   return {
