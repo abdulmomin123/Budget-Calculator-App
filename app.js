@@ -248,7 +248,9 @@ var UIController = (function () {
 
     // Prints the budget data to the dom
     displayBudget: function (obj) {
-      document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
+      document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(
+        obj.budget
+      );
       document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalInc;
       document.querySelector(DOMStrings.expenseLabel).textContent =
         obj.totalExp;
