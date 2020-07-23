@@ -195,6 +195,13 @@ var UIController = (function () {
     return int + "." + dec;
   };
 
+  // Loops through a list of nodes
+  var nodeListForEach = function (list, callback) {
+    for (i = 0; i < list.length; i++) {
+      callback(list[i], i);
+    }
+  };
+
   return {
     getDOMStrings: function () {
       return DOMStrings;
@@ -274,12 +281,6 @@ var UIController = (function () {
     displayPercentages: function (percentages) {
       var fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
 
-      var nodeListForEach = function (list, callback) {
-        for (i = 0; i < list.length; i++) {
-          callback(list[i], i);
-        }
-      };
-
       nodeListForEach(fields, function (current, index) {
         if (percentages[index] > 0) {
           current.textContent = percentages[index] + "%";
@@ -316,6 +317,26 @@ var UIController = (function () {
 
       currentTime.textContent = monthNames[month] + " " + year;
     },
+
+    // UX improvement
+    changedType: function () {
+      var fields;
+
+      fields = document.querySelectorAll(
+        DOMStrings.inputType +
+          "," +
+          DOMStrings.inputDescription +
+          "," +
+          DOMStrings.inputValue
+      );
+
+      nodeListForEach(fields, function (current) {
+        current.classList.toggle("red-focus");
+      });
+
+      // Change button color
+      document.querySelector(DOMStrings.inputBtn).classList.toggle("red");
+    },
   };
 })();
 
@@ -338,6 +359,11 @@ var controller = (function (budgetCTRL, UICTRL) {
 
     // Delete event for delete button
     container.addEventListener("click", ctrlDeleteItem);
+
+    // UX inprovement
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", UICTRL.changedType);
   };
 
   // Calcualte and display the budget
