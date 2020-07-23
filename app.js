@@ -144,10 +144,6 @@ var budgetController = (function () {
         data.allItems[type].splice(index, 1);
       }
     },
-
-    test: function () {
-      console.log(data);
-    },
   };
 })();
 
@@ -171,13 +167,6 @@ var UIController = (function () {
 
   // Formats the numbers
   var formatNumber = function (number) {
-    // Rules
-    /* 
-    + or - before numbers depending on item type
-    exactly 2 decimal points after each number
-    comma seperating the thousands
-    round the decimal numbers to 2 digit
-    */
     var numberSplitted, int, dec;
 
     number = Math.abs(number);
