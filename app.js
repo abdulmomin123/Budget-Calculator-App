@@ -168,6 +168,32 @@ var UIController = (function () {
     expensesPercLabel: ".item__percentage",
   };
 
+  // Formats the numbers
+  var formatNumber = function (number) {
+    // Rules
+    /* 
+    + or - before numbers depending on item type
+    exactly 2 decimal points after each number
+    comma seperating the thousands
+    round the decimal numbers to 2 digit
+    */
+    var numberSplitted, int, dec;
+
+    number = Math.abs(number);
+    number = number.toFixed(2);
+
+    numberSplitted = number.split(".");
+
+    int = numberSplitted[0];
+    dec = numberSplitted[1];
+
+    if (int.length > 3) {
+      int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3);
+    }
+
+    return int + "." + dec;
+  };
+
   return {
     getDOMStrings: function () {
       return DOMStrings;
@@ -199,7 +225,7 @@ var UIController = (function () {
       // Replace the placeholder text with object data
       newHtml = html.replace("%id%", obj.id);
       newHtml = newHtml.replace("%description%", obj.description);
-      newHtml = newHtml.replace("%value%", obj.value);
+      newHtml = newHtml.replace("%value%", formatNumber(obj.value));
 
       // Insert HTML to the dom
       document.querySelector(element).insertAdjacentHTML("beforeend", newHtml);
