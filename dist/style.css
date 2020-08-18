@@ -126,6 +126,25 @@ body {
 .add__container {
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Media Queries */
+@media (max-width: 500px) {
+  .add__container {
+    flex-direction: column;
+  }
+
+  .add__container > * {
+    margin-bottom: 10px;
+  }
+
+  .add__container select,
+  .add__container input {
+    width: 100%;
+  }
 }
 
 .add__type {
@@ -189,11 +208,21 @@ body {
 
 /***** LISTS *****/
 .container {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20%;
+  align-items: center;
+  justify-content: center;
   padding: 3.75rem;
   max-width: 80rem;
   margin: 0 auto;
+}
+
+/* Media Queries */
+@media (max-width: 500px) {
+  .container {
+    padding: 1.5rem;
+  }
 }
 
 .income,
@@ -201,10 +230,6 @@ body {
   flex: 0 0 50%;
   text-align: center;
   border-bottom: 1px solid #eee;
-}
-
-.income {
-  margin-right: 2rem;
 }
 
 h2 {
